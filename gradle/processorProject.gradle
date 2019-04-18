@@ -67,11 +67,7 @@ task writeSleighDevBuild {
 			into "data"
 			from (templateFilePath) {
 				rename { "build.xml" }
-<<<<<<< HEAD:gradle/processorProject.gradle
 				expand ( [ 'gradleSleighDevClasspath': sleighDevClasspath ] )
-=======
-				expand ( [ 'gradleSleighDevClasspath': project(':SoftwareModeling').sleighDevClasspath.get() ] )
->>>>>>> f1f004df872646e621e04a6c114610bef455c8bf:gradleScripts/processorUtils.gradle
 			}
 		}
 	}
