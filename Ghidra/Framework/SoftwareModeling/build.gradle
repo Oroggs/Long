@@ -30,7 +30,15 @@ dependencies {
 	// Must specify the specific antlr implementation to use or it will default to trying to find
 	// version 2.7.7 (which we don't have)
 	antlr "org.antlr:antlr:3.5.2"
+<<<<<<< HEAD
 }	
+=======
+}
+
+// Define classpath needed to execute sleigh compiler during development
+// (see gradleScripts/processorUtils.gradle)
+ext.sleighDevClasspath = project.provider { project.sourceSets.main.runtimeClasspath.collect { it.absolutePath }.join(':') }
+>>>>>>> f1f004df872646e621e04a6c114610bef455c8bf
 
 def genSrcDir = 'generated-src/antlr/main'
 generateGrammarSource {
