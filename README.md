@@ -1,5 +1,7 @@
 # Long - Long is Only a Not officially supported Ghidra 
 
+![travis-master](https://travis-ci.com/long-re/Long.svg?branch=master)
+
 ![Long](GhidraDocs/images/Long.png)
 
 Long is a forked version of Ghidra that is not officially supported as it is only a community version.
