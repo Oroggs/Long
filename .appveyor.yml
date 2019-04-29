@@ -1,0 +1,84 @@
+version: '{build}'
+
+os: Visual Studio 2017
+
+clone_depth: 1
+
+branches:
+  only:
+    - master
+    - nightly-release
+  
+environment:
+  JAVA_HOME: C:\Program Files\Java\jdk11
+  
+install:
+  - ps: |
+      # 1. setup ghidra.bin
+      [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+      $startup_directory = $PSScriptRoot
+      if(-not(Test-Path -Path "$PSScriptRoot\..\ghidra.bin")){
+          New-Item -Path "..\ghidra.bin\Ghidra\Features\GhidraServer\" -ItemType Directory
+          (New-Object System.Net.WebClient).DownloadFile("https://sourceforge.net/projects/yajsw/files/yajsw/yajsw-stable-12.12/yajsw-stable-12.12.zip", "$env:TEMP\yajsw-stable-12.12.zip")
+          Copy-Item "$env:Temp\yajsw-stable-12.12.zip" "..\ghidra.bin\Ghidra\Features\GhidraServer\"
+      }
+
+      # 2. flat repo dependencies
+      if(-not(Test-Path -Path "$env:userprofile\flatRepo")){
+          New-Item -Path "$env:userprofile\.gradle\init.d" -ItemType Directory
+          $obj = @'
+      ext.HOME =  System.getProperty('user.home')
+      allprojects {
+          repositories {
+              mavenCentral()
+              jcenter()
+              flatDir name:'flat', dirs:["$HOME\\flatRepo"]
+          }
+      }
+      '@
+          Out-File -FilePath "$env:userprofile\.gradle\init.d\repos.gradle" -InputObject $obj -Encoding ASCII
+          New-Item -Path "$env:userprofile\flatRepo\" -ItemType Directory
+          (New-Object System.Net.WebClient).DownloadFile("https://github.com/pxb1988/dex2jar/releases/download/2.0/dex-tools-2.0.zip", "$env:TEMP\dex-tools-2.0.zip")
+          Expand-Archive -Path "$env:TEMP\dex-tools-2.0.zip" -DestinationPath "$env:TEMP" -Force
+          Copy-Item "$env:TEMP\dex2jar-2.0\lib\dex-*.jar" "$env:userprofile\flatRepo\"
+          (New-Object System.Net.WebClient).DownloadFile("https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/android4me/AXMLPrinter2.jar", "$env:userprofile\flatRepo\AXMLPrinter2.jar")
+          (New-Object System.Net.WebClient).DownloadFile("https://sourceforge.net/projects/catacombae/files/HFSExplorer/0.21/hfsexplorer-0_21-bin.zip", "$env:TEMP\hfsexplorer-0_21-bin.zip")
+          New-Item -Path "$env:TEMP\hfsx" -ItemType Directory
+          Expand-Archive -Path "$env:TEMP\hfsexplorer-0_21-bin.zip" -DestinationPath "$env:TEMP\hfsx"
+          Copy-Item "$env:TEMP\hfsx\lib\csframework.jar" "$env:userprofile\flatRepo\"
+          Copy-Item "$env:TEMP\hfsx\lib\hfsx_dmglib.jar" "$env:userprofile\flatRepo\"
+          Copy-Item "$env:TEMP\hfsx\lib\hfsx.jar" "$env:userprofile\flatRepo\"
+          Copy-Item "$env:TEMP\hfsx\lib\iharder-base64.jar" "$env:userprofile\flatRepo\"
+      }
+
+      # 4. unpack
+      cd $startup_directory
+      ./gradlew.bat yajswDevUnpack
+      
+  - C:\cygwin64\setup-x86_64.exe  -qnNd -R C:/cygwin64 -s http://cygwin.mirror.constant.com -l C:/cygwin64/var/cache/setup --packages "flex,bison,perl"
+  - SET PATH=C:/cygwin64/bin;%PATH%
+        
+
+build_script:
+    - ./gradlew.bat buildGhidra
+      
+
+artifacts: 
+    - path: build\dist\*.zip
+      name: Long-Windows-Release
+      
+before_deploy:
+  - ps: |
+      git config --local user.name "Anciety"
+      git config --local user.email "anciety512@gmail.com"
+      $Env:TAG = "$(Get-Date -UFormat "%Y%m%d%H%M%S"-$(git log --format=%h -1)-Windows)"
+      git tag $Env:TAG
+      
+deploy:
+    release: $(Env:TAG) 
+    provider: Github
+    auth_token:
+        secure: 4HNXcelhTqomZJwF8cMzNiElZZhl/HXJUpfQ6wq/1lz4cz/ZiUaUmUInHFPNdG7Y
+    artifact: /*.zip/
+    on:
+      branch: nightly-release
