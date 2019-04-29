@@ -71,7 +71,7 @@ before_deploy:
   - ps: |
       git config --local user.name "Anciety"
       git config --local user.email "anciety512@gmail.com"
-      $Env:TAG = "$(Get-Date -UFormat "%Y%m%d%H%M%S"-$(git log --format=%h -1)-Windows)"
+      $Env:TAG = "$(Get-Date -UFormat "%Y%m%d%H%M%S")-$(git log --format=%h -1)-Windows"
       git tag $Env:TAG
       
 deploy:
