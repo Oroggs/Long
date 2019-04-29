@@ -17,9 +17,7 @@ before_deploy:
 deploy:
   provider: releases
   api_key:
-    secure: ${GITHUB_TOKEN_SECURED}
+    secure: Ebk/wxyquFTPMm57Q+FFnOa98vMpVbREJnpprPfft4/yAL/PpKrx/RT9NwW8ccFw9E+OMYbwbeaZCF2l7xpxFRLvPMZ3RjoulU5y6vhXYmig3UD+rOeeyPB66ZoPtM6ELq3Mjvw403v+sL0HFzK/glj2iRh2R1CXgsR8gfseB/W7YZunoeNmZMNhIhzG45BcxsRLUQNf0dtwu1/ZS+kDpJHKtCyBH7OfCXRA6O5MXzXDDYQtibefm1qwTa6DFQnyIEmqXTi4xX+dLr856C9cVEKlNMKDETr3YgK5wUNq7ip2ostMqLyJ3+jK3DI45AxfwEgQaEgjTGW6OCMNax0aeUoLwTLazxDSaFu1nUtJOwUjrZj/47mwR8auJqUdtigQyKIo8j1DNkdaj0NW+DjJiONalXpvLjFnFkZoCnnBsKTlymS9XoNtZfGfZIJSOPMp+cKiBwJ0JjAfTgx3xIcF0IsSq5HAKcGpZb9/sXcl4IClFaNZEFtJLET9pqtN86TqquDg2wSCLTvTkJjrcl0kzkpxZZigaWToznboaI/6catJy4QbbtgfWjCV5x8SUv14mkXUHJ3IW6/ah9WkPwPKqogLhpJqsljMtdup1lKZiVXMbPGMK9CoD2NI5cYAA06oR42n8MIDbvFrwqx3HdIvRM8WnUvSjituzeL88Hz7Tgw=
   file: build/dist/*.zip
-  file_glob: true
   on:
-    branch: nightly-release
     repo: long-re/Long
