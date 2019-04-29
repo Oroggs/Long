@@ -1,6 +1,9 @@
 # Long - Long is Only a Not officially supported Ghidra 
 
-[![Build Status](https://travis-ci.com/long-re/Long.svg?branch=nightly-release)](https://travis-ci.com/long-re/Long)
+[![Travis Nightly Status](https://travis-ci.com/long-re/Long.svg?branch=nightly-release)](https://travis-ci.com/long-re/Long)
+[![Appveyor Nightly Stauts](https://ci.appveyor.com/api/projects/status/90i7rqb914pmd6yh/branch/nightly-release?svg=true)](https://ci.appveyor.com/project/Escapingbug/long/branch/nightly-release)
+
+
 
 ![Long](GhidraDocs/images/Long.png)
 
