@@ -11,7 +11,7 @@ file("Ghidra/application.properties").withReader { reader ->
 	version = ghidraProps.getProperty('application.version')
 	project.ext.RELEASE_VERSION = version
 	project.ext.RELEASE_NAME = ghidraProps.getProperty('application.release.name')
-	project.ext.DISTRO_PREFIX = "ghidra_${version}"
+	project.ext.DISTRO_PREFIX = "Long_${version}"
 	project.ext.JAVA_COMPILER = ghidraProps.getProperty('application.java.compiler')
 	
 	// Build dates may or may not be already present in the application.properties file.

@@ -1,19 +1,23 @@
-# Ghidra Software Reverse Engineering Framework
+# Long - Long is Only a Not officially supported Ghidra 
 
-Ghidra is a software reverse engineering (SRE) framework created and maintained by the [National Security Agency][nsa] Research Directorate. This framework includes a suite of full-featured, high-end software analysis tools that enable users to analyze compiled code on a variety of platforms including Windows, macOS, and Linux. Capabilities include disassembly, assembly, decompilation, graphing, and scripting, along with hundreds of other features. Ghidra supports a wide variety of processor instruction sets and executable formats and can be run in both user-interactive and automated modes. Users may also develop their own Ghidra plug-in components and/or scripts using Java or Python.
+![travis-master](https://travis-ci.com/long-re/Long.svg?branch=master)
 
-In support of NSA's Cybersecurity mission, Ghidra was built to solve scaling and teaming problems on complex SRE efforts, and to provide a customizable and extensible SRE research platform. NSA has applied Ghidra SRE capabilities to a variety of problems that involve analyzing malicious code and generating deep insights for SRE analysts who seek a better understanding of potential vulnerabilities in networks and systems.
+![Long](GhidraDocs/images/Long.png)
 
-To start developing extensions and scripts, try out the GhidraDev plugin for Eclipse, which is part of the distribution package.  The full release build can be downloaded from our [project homepage][project].
+Long is a forked version of Ghidra that is not officially supported as it is only a community version.
 
-This repository contains the source for the core framework, features, and extensions.
-If you would like to contribute, please take a look at our [contributor guide][contrib] to see how you can participate in this open source project.
+The goal of this project is to allow faster prototyping with more experimental features and for more fluent user experience. Current Ghidra has many "not so intuitional" choices, and that's what we want to change.
 
-If you are a U.S. citizen interested in projects like this, to develop Ghidra, and
-other cybersecurity tools, for NSA to help protect our nation and its allies,
-consider applying for a [career with us][career].
+As for the name, Long means Dragon in Chinese, can be pronounced more like "lown".
 
-[nsa]: https://www.nsa.gov
-[contrib]: CONTRIBUTING.md
-[career]: https://www.intelligencecareers.gov/nsa
-[project]: https://www.ghidra-sre.org/
+Some of the decisions are still yet to made, including how to manage this project as it will definitely emerge along with the community. With small community as for now, nothing needs to be done to manage it anyway. :P
+
+# Roadmap
+
+Current Roadmap is to find out those influent user experiences and change from the easier ones. Github project may be used to denote what we want to change.
+
+# Contributors
+
+We follow [official Ghidra](https://github.com/NationalSecurityAgency/ghidra), that makes them the main contributors.
+
+Members from [Team r3kapig](https://github.com/r3kapig) are currently handling those changes deviating from main repo.

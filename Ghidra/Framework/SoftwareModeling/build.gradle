@@ -32,6 +32,7 @@ dependencies {
 	antlr "org.antlr:antlr:3.5.2"
 }	
 
+
 def genSrcDir = 'generated-src/antlr/main'
 generateGrammarSource {
 
