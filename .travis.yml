@@ -1,0 +1,14 @@
+language: java
+sudo: false
+
+os:
+  - linux
+  - osx
+
+jdk: openjdk11
+osx_image: xcode10.1
+dist: xenial
+
+before_install: bash CI/env_setup.sh
+script:
+  - ./gradlew buildGhidra
