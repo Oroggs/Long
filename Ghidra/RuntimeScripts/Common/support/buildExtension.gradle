@@ -16,7 +16,7 @@ file(ghidraDir + "/application.properties").withReader { reader ->
 	ghidraProps.load(reader)
 	project.ext.ghidra_version = ghidraProps.getProperty('application.version')
 	project.ext.RELEASE_NAME = ghidraProps.getProperty('application.release.name')
-	project.ext.DISTRO_PREFIX = "ghidra_${ghidra_version}"
+	project.ext.DISTRO_PREFIX = "Long_${ghidra_version}"
 }
 
 configurations {
