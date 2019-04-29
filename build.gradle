@@ -319,9 +319,3 @@ String generateLibraryDependencyMapping() {
 
 task allSleighCompile {
 }
-
-allprojects { proj ->
-    repositories {
-        mavenCentral()
-    }
-}

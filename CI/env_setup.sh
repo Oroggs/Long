@@ -12,6 +12,7 @@ fi
 
 # 2. flat repo dependencies
 if [[ ! -d "$HOME/flatRepo" ]]; then
+    mkdir -p $HOME/.gradle/init.d
     cat << EOF > $HOME/.gradle/init.d/repos.gradle
     ext.HOME = System.getProperty('user.home')
 
@@ -39,15 +40,6 @@ EOF
     cd lib
     cp csframework.jar hfsx_dmglib.jar hfsx.jar iharder-base64.jar $HOME/flatRepo/
 fi
-
-# 3. gradle & gradle wrapper
-if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
-    # OSX has no gradle, install it
-    brew install gradle
-fi
-
-# setup gradle wrapper to use a correct version
-gradle wrapper --gradle-version 5.4 --distribution-type all
 
 # 4. unpack
 cd ${startup_directory}
