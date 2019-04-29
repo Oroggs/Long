@@ -8,6 +8,9 @@ branches:
   only:
     - master
     - nightly-release
+  except:
+    - /*-osx/
+    - /*-linux/
   
 environment:
   JAVA_HOME: C:\Program Files\Java\jdk11
@@ -76,7 +79,7 @@ before_deploy:
       
 deploy:
     release: $(Env:TAG) 
-    provider: Github
+    provider: GitHub
     auth_token:
         secure: 4HNXcelhTqomZJwF8cMzNiElZZhl/HXJUpfQ6wq/1lz4cz/ZiUaUmUInHFPNdG7Y
     artifact: /*.zip/
