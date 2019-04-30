@@ -78,7 +78,7 @@ before_deploy:
       git tag $Env:TAG
       
 deploy:
-    release: $(Env:TAG) 
+    release: $(TAG)
     provider: GitHub
     auth_token:
         secure: 4HNXcelhTqomZJwF8cMzNiElZZhl/HXJUpfQ6wq/1lz4cz/ZiUaUmUInHFPNdG7Y
