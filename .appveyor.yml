@@ -82,6 +82,6 @@ deploy:
     provider: GitHub
     auth_token:
         secure: 4HNXcelhTqomZJwF8cMzNiElZZhl/HXJUpfQ6wq/1lz4cz/ZiUaUmUInHFPNdG7Y
-    artifact: /*.zip/
+    artifact: Long-Windows-Release
     on:
       branch: nightly-release
