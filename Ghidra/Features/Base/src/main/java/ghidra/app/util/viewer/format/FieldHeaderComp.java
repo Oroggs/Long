@@ -61,9 +61,9 @@ public class FieldHeaderComp extends JPanel {
 	private FieldHeader headerPanel;
 
 	/**
-	 * Constructs a new FieldHeader for the given model.
-	 * @param formatMgr the format manager
+	 * Constructs a new FieldHeaderComp for the given model.
 	 * @param headerPanel the headerPanel containing this component.
+	 * @param modelNumber the number of the model in format manager
 	 */
 	public FieldHeaderComp(FieldHeader headerPanel, int modelNumber) {
 		FormatManager formatMgr = headerPanel.getFormatManager();
@@ -104,6 +104,13 @@ public class FieldHeaderComp extends JPanel {
 			public void mouseReleased(MouseEvent e) {
 				if ((e.getModifiers() & InputEvent.BUTTON1_MASK) > 0) {
 					released(e.getX(), e.getY());
+				}
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if ((e.getModifiers() & InputEvent.BUTTON1_MASK) > 0) {
+					clicked(e.getX(), e.getY());
 				}
 			}
 		});
@@ -182,6 +189,34 @@ public class FieldHeaderComp extends JPanel {
 				setCursor(defaultCursor);
 				break;
 
+		}
+	}
+
+	/**
+	 * Callback for when the mouse button is clicked
+	 * @param x x position of the clicked event
+	 * @param y y position of the clicked event
+	 */
+	private void clicked(int x, int y) {
+		headerPanel.setTabLock(true);
+		setCursor(x, y);
+		anchorX = x;
+		anchorY = y;
+		FieldFactory[] fields = model.getFactorys(curRow);
+		switch (state) {
+			case NEAR_EDGE:
+				edgeColSize = fields[edgeCol].getWidth();
+				break;
+			case OVER_FIELD:
+				// switch between enable and disable status when
+				// clicked over a field
+				FieldFactory fieldClicked = fields[getCol(curRow, x)];
+				if (fieldClicked.isEnabled()) {
+					fieldClicked.setEnabled(false);
+				} else {
+					fieldClicked.setEnabled(true);
+				}
+				break;
 		}
 	}
 
